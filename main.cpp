@@ -224,6 +224,7 @@ int main(int argc, char *argv[])
     }
 
     cout << "[DEBUG] Parsing TLE..." << endl;
+    cout << "==================== ISS DATA =====================";
 
     QFile file("./data/iss_tle.txt");
     if (file.open(QIODevice::ReadOnly)) {
@@ -259,6 +260,7 @@ int main(int argc, char *argv[])
 
         double taiMjd = dateToTAIMJD(year, month, day, hour, minute, second);
         cout << "TAI MJD: " << taiMjd << endl;
+        cout << "===================================================";
         
         file.close();
     }
