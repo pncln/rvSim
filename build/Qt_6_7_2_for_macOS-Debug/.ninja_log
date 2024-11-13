@@ -1,8 +1,0 @@
-# ninja log v6
-0	48	1731497982325810058	rvSim_autogen/timestamp	d82a12ba58275f8d
-0	48	1731497982325810058	rvSim_autogen/mocs_compilation.cpp	d82a12ba58275f8d
-0	48	1731497982325810058	/Users/pncln/Documents/Code/Projects/rvSim/build/Qt_6_7_2_for_macOS-Debug/rvSim_autogen/timestamp	d82a12ba58275f8d
-0	48	1731497982325810058	/Users/pncln/Documents/Code/Projects/rvSim/build/Qt_6_7_2_for_macOS-Debug/rvSim_autogen/mocs_compilation.cpp	d82a12ba58275f8d
-48	76	1731497982333894704	CMakeFiles/rvSim.dir/rvSim_autogen/mocs_compilation.cpp.o	b983e6587f9b9211
-49	660	1731497982334070997	CMakeFiles/rvSim.dir/main.cpp.o	b29b62a58accc88f
-662	699	1731497982947380254	rvSim	c2b52a7fe6554965
