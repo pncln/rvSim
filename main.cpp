@@ -8,11 +8,11 @@
 #include <QTextStream>
 #include <QDebug>
 #include <QString>
+#include <cmath>
 
 using namespace std;
 
 const int MAX_ITER = 100000;
-const double GM = 398600441800000.0; // Earth standard gravitational parameter
 const double mu = 398600.4418; // Earth's gravitational parameter [km³/s²]
 
 struct Vector3 {
@@ -72,8 +72,8 @@ void kepler_to_state(double a, double e, double i, double Omega, double w, doubl
     // Orbital frame
     Vector3 r_o = {r_c * cos(nu), r_c * sin(nu), 0.0};
     Vector3 v_o = {
-        -sqrt(GM * a) / r_c * sin(E),
-        sqrt(GM * a) / r_c * sqrt(1 - e * e) * cos(E),
+        -sqrt(mu * a) / r_c * sin(E),
+        sqrt(mu * a) / r_c * sqrt(1 - e * e) * cos(E),
         0.0
     };
 
@@ -97,6 +97,9 @@ void kepler_to_state(double a, double e, double i, double Omega, double w, doubl
         
         v_o.x * sin(w) * sin(i) + v_o.y * cos(w) * sin(i)
     };
+
+
+
 
     // Print results
     cout << "\nSemi-major Axis: " << a << " m" << endl;
@@ -134,6 +137,57 @@ KeplerianElements parseTLE(const QString& line1, const QString& line2) {
     elements.a = pow(mu / (elements.meanMotion * elements.meanMotion), 1.0/3.0);
     
     return elements;
+}
+
+QString getTLEDate(const QString& line1) {
+    int year = line1.mid(18, 2).toInt();
+    double dayOfYear = line1.mid(20, 12).toDouble();
+    
+    year = (year < 57) ? year + 2000 : year + 1900;
+    
+    int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+        daysInMonth[1] = 29;  // Leap year
+    }
+    
+    int day = (int)dayOfYear;
+    int month = 1;
+    while (day > daysInMonth[month-1]) {
+        day -= daysInMonth[month-1];
+        month++;
+    }
+    
+    double fractionalDay = dayOfYear - floor(dayOfYear);
+    int hours = (int)(fractionalDay * 24);
+    int minutes = (int)((fractionalDay * 24 - hours) * 60);
+    int seconds = (int)(((fractionalDay * 24 - hours) * 60 - minutes) * 60);
+    
+    return QString("%1-%2-%3 %4:%5:%6")
+        .arg(year)
+        .arg(month, 2, 10, QChar('0'))
+        .arg(day, 2, 10, QChar('0'))
+        .arg(hours, 2, 10, QChar('0'))
+        .arg(minutes, 2, 10, QChar('0'))
+        .arg(seconds, 2, 10, QChar('0'));
+}
+
+double dateToTAIMJD(int year, int month, int day, int hour, int minute, int second) {
+    int a = (14 - month) / 12;
+    int y = year + 4800 - a;
+    int m = month + 12 * a - 3;
+    
+    double jd = day + (hour - 12.0) / 24.0 + minute / 1440.0 + second / 86400.0
+              + (153 * m + 2) / 5 
+              + 365 * y 
+              + y / 4 
+              - y / 100 
+              + y / 400 
+              - 32045;
+    
+    double taiUtcOffset = 37.0 / 86400.0;
+    double taiMjd = jd - 2430000.5 + taiUtcOffset;
+    
+    return taiMjd;
 }
 
 int main(int argc, char *argv[])
@@ -179,15 +233,6 @@ int main(int argc, char *argv[])
         QString line2 = in.readLine(); // TLE line 2
         
         KeplerianElements elements = parseTLE(line1, line2);
-        
-        // cout << "Keplerian Elements:" << endl;
-        // cout << "Inclination (i): " << elements.inclination << " deg" << endl;
-        // cout << "RAAN (Omega): " << elements.raan << " deg" << endl;
-        // cout << "Eccentricity (e): " << elements.eccentricity << endl;
-        // cout << "Argument of Perigee (w): " << elements.argumentOfPerigee << " deg" << endl;
-        // cout << "Mean Anomaly (M): " << elements.meanAnomaly << " deg" << endl;
-        // cout << "Mean Motion: " << elements.meanMotion << " revs/day" << endl;
-        // cout << "Semi-major Axis (a): " << elements.a << " m" << endl;
 
         double a = elements.a;
         double i = elements.inclination;
@@ -198,6 +243,22 @@ int main(int argc, char *argv[])
 
         kepler_to_state(a,e,i,Omega,w,M);
 
+        QString date = getTLEDate(line1);
+        cout << "TLE Epoch: " << date.toStdString() << endl;;
+        
+        QStringList parts = date.split(" ");
+        QStringList dateParts = parts[0].split("-");
+        QStringList timeParts = parts[1].split(":");
+
+        int year = dateParts[0].toInt();
+        int month = dateParts[1].toInt();
+        int day = dateParts[2].toInt();
+        int hour = timeParts[0].toInt();
+        int minute = timeParts[1].toInt();
+        int second = timeParts[2].toInt();
+
+        double taiMjd = dateToTAIMJD(year, month, day, hour, minute, second);
+        cout << "TAI MJD: " << taiMjd << endl;
         
         file.close();
     }
