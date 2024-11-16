@@ -98,9 +98,6 @@ void kepler_to_state(double a, double e, double i, double Omega, double w, doubl
         v_o.x * sin(w) * sin(i) + v_o.y * cos(w) * sin(i)
     };
 
-
-
-
     // Print results
     cout << "\nSemi-major Axis: " << a << " m" << endl;
     cout << "Eccentricity: " << e << endl;
