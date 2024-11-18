@@ -9,6 +9,9 @@
 #include <QDebug>
 #include <QString>
 #include <cmath>
+#include <stdexcept>
+#include <string>
+#include <tuple>
 
 using namespace std;
 
@@ -41,6 +44,53 @@ double deg_to_rad(double x) {
 
 double rad_to_deg(double x) {
     return x * 180.0 / M_PI;
+}
+
+std::tuple<Vector3, Vector3> generateOrbit(double x_km, double y_km, double inclination) {
+    // Earth standard gravitational parameter [m^3/s^2]
+    const double GM = 398600441800000.0;
+
+    // Earth radius [m]
+    const double R = 6371000.0;
+
+    const double M_PER_KM = 1000.0;
+    const double MIN_ALT = 100;
+    const double MAX_ALT = 1000;
+
+    // Input validation
+    if (x_km < MIN_ALT || y_km < MIN_ALT) {
+        throw std::runtime_error("Altitudes must be " + std::to_string(MIN_ALT) + " km or above");
+    }
+
+    if (x_km > MAX_ALT || y_km > MAX_ALT) {
+        // Warning could be handled differently based on needs
+        // Currently just continuing execution
+    }
+
+    if (inclination < -90.0 || inclination > 90.0) {
+        throw std::runtime_error("Inclination must be between -90 and 90 degrees");
+    }
+
+    // Convert to meters
+    double x_r = R + M_PER_KM * x_km;
+    double y_r = R + M_PER_KM * y_km;
+
+    // Initial position vector
+    Vector3 init_pos = {x_r, 0.0, 0.0};
+
+    // Calculate semi-major axis
+    double a = 0.5 * (x_r + y_r);
+
+    // Calculate initial velocity using vis-viva equation
+    double init_vel_mag = std::sqrt(GM * (2.0/x_r - 1.0/a));
+
+    // Convert inclination to radians for trig functions
+    double inc_rad = inclination * M_PI / 180.0;
+    Vector3 init_vel = {0.0,
+                        init_vel_mag * std::cos(inc_rad),
+                        init_vel_mag * std::sin(inc_rad)};
+
+    return {init_pos, init_vel};
 }
 
 void kepler_to_state(double a, double e, double i, double Omega, double w, double M) {
