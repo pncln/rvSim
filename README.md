@@ -50,6 +50,13 @@ This project simulates orbital mechanics and rendezvous operations with the ISS 
 
 ![](https://latex2image-output.s3.amazonaws.com/img-BMxFxmpJPxRr.png)
 
+## Requirements
+
+To compile this project, you will need:
+
+- A C++ compiler that supports C++17 or higher
+- CMake version 3.10 or higher
+- Qt Framework (ensure that the Qt development libraries are installed)
 
 ## Dependencies
 
