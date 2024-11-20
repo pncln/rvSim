@@ -22,10 +22,7 @@ This project simulates orbital mechanics and rendezvous operations with the ISS 
 
 ![M](https://latex2image-output.s3.amazonaws.com/img-HEHkVtHt3UGF.png)
 
-Where:
-- \( M \): Mean anomaly
-- \( E \): Eccentric anomaly
-- \( e \): Eccentricity
+![](https://latex2image-output.s3.amazonaws.com/img-Pwmf4gETu6nR.png)
 
 #### Position Vector Components
 
@@ -43,7 +40,7 @@ Where:
 
 #### Transfer Orbit Semi-major Axis
 
-\[ a_t = \frac{r_1 + r_2}{2} \]
+![a_t](https://latex2image-output.s3.amazonaws.com/img-MewJxHjDGWnn.png)
 
 #### Delta-V Calculations
 
@@ -51,10 +48,8 @@ Where:
 
 ![deltav2](https://latex2image-output.s3.amazonaws.com/img-pQmWNEuJ6mUX.png)
 
-Where:
-- \( \mu \): Earth's gravitational parameter (398600.4418 km³/s²)
-- \( r_1 \): Initial orbit radius
-- \( r_2 \): Target orbit radius
+![](https://latex2image-output.s3.amazonaws.com/img-BMxFxmpJPxRr.png)
+
 
 ## Dependencies
 
