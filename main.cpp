@@ -311,15 +311,15 @@ int main(int argc, char *argv[])
         cout << "TAIMJD: " << taiMjd << endl;
         cout << "===================================================\n";
 
-        std::array<double, 3> sat1_icrf = {1000, 2000, 500};  // km
-        std::array<double, 3> sat2_icrf = {2000, 3000, 1000}; // km
+        std::array<double, 3> sat1_icrf = {3102.369923546404, -6046.870039513878, 9.19908999365683};  // km
+        std::array<double, 3> sat2_icrf = {-1518.000593617628, 6160.377518645912, 1838.091917768559}; // km
 
 
         auto sat1_2d = TRANSFORM2D::transformTo2D(sat1_icrf, sat2_icrf, sat1_icrf);
         auto sat2_2d = TRANSFORM2D::transformTo2D(sat1_icrf, sat2_icrf, sat2_icrf);
 
-        std::cout << "Satellite 1 2D coordinates: (" << sat1_2d[0] << ", " << sat1_2d[1] << ")\n";
-        std::cout << "Satellite 2 2D coordinates: (" << sat2_2d[0] << ", " << sat2_2d[1] << ")\n";
+        std::cout << "ISS 2D coordinates: (" << sat1_2d[0] << ", " << sat1_2d[1] << ")\n";
+        std::cout << "ourVehicle 2D coordinates: (" << sat2_2d[0] << ", " << sat2_2d[1] << ")\n";
 
 
         cout << "===================================================\n";
