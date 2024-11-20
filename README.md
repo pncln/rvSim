@@ -20,7 +20,7 @@ This project simulates orbital mechanics and rendezvous operations with the ISS 
 
 #### Kepler's Equation
 
-\[ M = E - e \cdot \sin(E) \]
+![M](https://latex2image-output.s3.amazonaws.com/img-HEHkVtHt3UGF.png)
 
 Where:
 - \( M \): Mean anomaly
@@ -29,20 +29,15 @@ Where:
 
 #### Position Vector Components
 
-\[ r = a(1 - e \cdot \cos(E)) \]
+![r](https://latex2image-output.s3.amazonaws.com/img-JrYh1ZpNPEJC.png)
 
-\[ x = r(\cos(\Omega)\cos(\omega+\nu) - \sin(\Omega)\sin(\omega+\nu)\cos(i)) \]
+![x](https://latex2image-output.s3.amazonaws.com/img-W1fvE6FTHGqQ.png)
 
-\[ y = r(\sin(\Omega)\cos(\omega+\nu) + \cos(\Omega)\sin(\omega+\nu)\cos(i)) \]
+![y](https://latex2image-output.s3.amazonaws.com/img-8REnkESaeJJ4.png)
 
-\[ z = r(\sin(i)\sin(\omega+\nu)) \]
+![z](https://latex2image-output.s3.amazonaws.com/img-WkY2CAs4wdRW.png)
 
-Where:
-- \( a \): Semi-major axis
-- \( \Omega \): Right ascension of ascending node
-- \( \omega \): Argument of periapsis
-- \( \nu \): True anomaly
-- \( i \): Inclination
+![](https://latex2image-output.s3.amazonaws.com/img-H96YWS2dm1kA.png)
 
 ### Hohmann Transfer Orbit
 
@@ -54,7 +49,7 @@ Where:
 
 ![deltav1](https://latex2image-output.s3.amazonaws.com/img-ynZYkntx4pbh.png)
 
-\[ \Delta V_2 = \sqrt{\frac{\mu}{r_2}} \left(1 - \sqrt{\frac{2r_1}{r_1+r_2}}\right) \]
+![deltav2](https://latex2image-output.s3.amazonaws.com/img-pQmWNEuJ6mUX.png)
 
 Where:
 - \( \mu \): Earth's gravitational parameter (398600.4418 km³/s²)
