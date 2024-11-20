@@ -61,6 +61,41 @@ Where:
 - $r_1$: Initial orbit radius
 - $r_2$: Target orbit radius
 
+## Orbit Generation Mathematics
+
+The orbit generation module calculates initial position and velocity vectors for spacecraft orbits using fundamental orbital mechanics principles.
+
+### Key Parameters
+- Earth's gravitational parameter (μ): $3.986004418 \times 10^{14} \text{ m}^3/\text{s}^2$
+- Earth radius (R): $6,371,000 \text{ m}$
+- Altitude range: 100-1000 km
+- Inclination range: $[-90°, 90°]$
+
+### Orbital Calculations
+
+The initial position and velocity vectors are computed using:
+
+#### Semi-major axis
+$a = \frac{r_1 + r_2}{2}$
+
+where:
+- $r_1$ = initial radius (Earth radius + x altitude)
+- $r_2$ = final radius (Earth radius + y altitude)
+
+#### Initial Velocity Magnitude
+Using the vis-viva equation:
+
+$v = \sqrt{\mu(\frac{2}{r} - \frac{1}{a})}$
+
+#### Initial State Vectors
+Position vector:
+$\vec{r}_0 = [x_r, 0, 0]$
+
+Velocity vector:
+$\vec{v}_0 = [0, v\cos(i), v\sin(i)]$
+
+where $i$ is the orbital inclination in degrees.
+
 ## Dependencies
 
 - Qt Framework
