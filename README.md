@@ -89,9 +89,11 @@ $$v = \sqrt{\mu(\frac{2}{r} - \frac{1}{a})}$$
 
 #### Initial State Vectors
 Position vector:
+
 $$\vec{r_0} = [x_r, 0, 0]$$
 
 Velocity vector:
+
 $$\vec{v_0} = [0, v\cos(i), v\sin(i)]$$
 
 where $i$ is the orbital inclination in degrees.
