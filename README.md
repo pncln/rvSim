@@ -68,8 +68,8 @@ The orbit generation module calculates initial position and velocity vectors for
 ### Key Parameters
 - Earth's gravitational parameter ($mu$): $3.986004418 \times 10^{14} \text{ m}^3/\text{s}^2$
 - Earth radius (R): $6,371,000 \text{ m}$
-- Altitude range: 100-1000 km
-- Inclination range: $[-90°, 90°]$
+- Altitude range: $100-1000 \text{ km}$
+- Inclination range: $[-90\degree, 90\degree]$
 
 ### Orbital Calculations
 
@@ -89,10 +89,10 @@ $$v = \sqrt{\mu(\frac{2}{r} - \frac{1}{a})}$$
 
 #### Initial State Vectors
 Position vector:
-$$\vec{r}_0 = [x_r, 0, 0]$$
+$$\vec{r_0} = [x_r, 0, 0]$$
 
 Velocity vector:
-$$\vec{v}_0 = [0, v\cos(i), v\sin(i)]$$
+$$\vec{v_0} = [0, v\cos(i), v\sin(i)]$$
 
 where $i$ is the orbital inclination in degrees.
 
