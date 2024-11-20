@@ -20,43 +20,61 @@ This project simulates orbital mechanics and rendezvous operations with the ISS 
 
 #### Kepler's Equation
 
-![M](https://latex2image-output.s3.amazonaws.com/img-HEHkVtHt3UGF.png)
+$$ M = E - e \sin(E) $$
 
-![](https://latex2image-output.s3.amazonaws.com/img-Pwmf4gETu6nR.png)
+Where:
+- $M$: Mean anomaly
+- $E$: Eccentric anomaly
+- $e$: Eccentricity
 
 #### Position Vector Components
 
-![r](https://latex2image-output.s3.amazonaws.com/img-JrYh1ZpNPEJC.png)
+$$ r = a(1 - e \cos(E)) $$
 
-![x](https://latex2image-output.s3.amazonaws.com/img-W1fvE6FTHGqQ.png)
+$$ x = r(\cos(\Omega)\cos(\omega+\nu) - \sin(\Omega)\sin(\omega+\nu)\cos(i)) $$
 
-![y](https://latex2image-output.s3.amazonaws.com/img-8REnkESaeJJ4.png)
+$$ y = r(\sin(\Omega)\cos(\omega+\nu) + \cos(\Omega)\sin(\omega+\nu)\cos(i)) $$
 
-![z](https://latex2image-output.s3.amazonaws.com/img-WkY2CAs4wdRW.png)
+$$ z = r(\sin(i)\sin(\omega+\nu)) $$
 
-![](https://latex2image-output.s3.amazonaws.com/img-H96YWS2dm1kA.png)
+Where:
+- $a$: Semi-major axis
+- $\Omega$: Right ascension of ascending node
+- $\omega$: Argument of periapsis
+- $\nu$: True anomaly
+- $i$: Inclination
 
 ### Hohmann Transfer Orbit
 
-#### Transfer Orbit Semi-major Axis
+#### Transfer Orbit Semi-major axis
 
-![a_t](https://latex2image-output.s3.amazonaws.com/img-MewJxHjDGWnn.png)
+$$ a_t = \frac{r_1 + r_2}{2} $$
 
 #### Delta-V Calculations
 
-![deltav1](https://latex2image-output.s3.amazonaws.com/img-ynZYkntx4pbh.png)
+$$ \Delta V_1 = \sqrt{\frac{\mu}{r_1}} \left(\sqrt{\frac{2r_2}{r_1+r_2}} - 1\right) $$
 
-![deltav2](https://latex2image-output.s3.amazonaws.com/img-pQmWNEuJ6mUX.png)
+$$ \Delta V_2 = \sqrt{\frac{\mu}{r_2}} \left(1 - \sqrt{\frac{2r_1}{r_1+r_2}}\right) $$
 
-![](https://latex2image-output.s3.amazonaws.com/img-BMxFxmpJPxRr.png)
+Where:
+- $\mu$: Earth's gravitational parameter (398600.4418 km³/s²)
+- $r_1$: Initial orbit radius
+- $r_2$: Target orbit radius
 
-## Requirements
+#### Transfer Orbit Semi-major Axis
 
-To compile this project, you will need:
+\[ a_t = \frac{r_1 + r_2}{2} \]
 
-- A C++ compiler that supports C++17 or higher
-- CMake version 3.10 or higher
-- Qt Framework (ensure that the Qt development libraries are installed)
+#### Delta-V Calculations
+
+\[ \Delta V_1 = \sqrt{\frac{\mu}{r_1}} \left(\sqrt{\frac{2r_2}{r_1+r_2}} - 1\right) \]
+
+\[ \Delta V_2 = \sqrt{\frac{\mu}{r_2}} \left(1 - \sqrt{\frac{2r_1}{r_1+r_2}}\right) \]
+
+Where:
+- \( \mu \): Earth's gravitational parameter (398600.4418 km³/s²)
+- \( r_1 \): Initial orbit radius
+- \( r_2 \): Target orbit radius
 
 ## Dependencies
 
