@@ -35,6 +35,12 @@ Makefile*
 ./build
 build/
 build/*/*
+.vscode/*
+./.vscode
+./.vscode/*/*
+.vscode/*/*/*
+/.vscode
+
 
 # Qt unit tests
 target_wrapper.*
