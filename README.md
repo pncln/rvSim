@@ -66,7 +66,7 @@ Where:
 The orbit generation module calculates initial position and velocity vectors for spacecraft orbits using fundamental orbital mechanics principles.
 
 ### Key Parameters
-- Earth's gravitational parameter ($mu$): $3.986004418 \times 10^{14} \text{ m}^3/\text{s}^2$
+- Earth's gravitational parameter ($\mu$): $3.986004418 \times 10^{14} \text{ m}^3/\text{s}^2$
 - Earth radius (R): $6,371,000 \text{ m}$
 - Altitude range: $100-1000 \text{ km}$
 - Inclination range: $[-90\degree, 90\degree]$
