@@ -61,21 +61,6 @@ Where:
 - $r_1$: Initial orbit radius
 - $r_2$: Target orbit radius
 
-#### Transfer Orbit Semi-major Axis
-
-\[ a_t = \frac{r_1 + r_2}{2} \]
-
-#### Delta-V Calculations
-
-\[ \Delta V_1 = \sqrt{\frac{\mu}{r_1}} \left(\sqrt{\frac{2r_2}{r_1+r_2}} - 1\right) \]
-
-\[ \Delta V_2 = \sqrt{\frac{\mu}{r_2}} \left(1 - \sqrt{\frac{2r_1}{r_1+r_2}}\right) \]
-
-Where:
-- \( \mu \): Earth's gravitational parameter (398600.4418 km³/s²)
-- \( r_1 \): Initial orbit radius
-- \( r_2 \): Target orbit radius
-
 ## Dependencies
 
 - Qt Framework
