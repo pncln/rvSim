@@ -52,7 +52,7 @@ Where:
 
 #### Delta-V Calculations
 
-\[ \Delta V_1 = \sqrt{\frac{\mu}{r_1}} \left(\sqrt{\frac{2r_2}{r_1+r_2}} - 1\right) \]
+![https://latex2image-output.s3.amazonaws.com/img-ynZYkntx4pbh.png]
 
 \[ \Delta V_2 = \sqrt{\frac{\mu}{r_2}} \left(1 - \sqrt{\frac{2r_1}{r_1+r_2}}\right) \]
 
