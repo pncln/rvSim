@@ -13,6 +13,8 @@
 #include <string>
 #include <tuple>
 
+#include "transform2d.h"
+
 using namespace std;
 
 const int MAX_ITER = 100000;
@@ -129,22 +131,22 @@ void kepler_to_state(double a, double e, double i, double Omega, double w, doubl
 
     // Convert to ECI frame
     Vector3 r = {
-        r_o.x * (cos(w) * cos(Omega) - sin(w) * cos(i) * sin(Omega)) - 
+        r_o.x * (cos(w) * cos(Omega) - sin(w) * cos(i) * sin(Omega)) -
         r_o.y * (sin(w) * cos(Omega) + cos(w) * cos(i) * sin(Omega)),
-        
-        r_o.x * (cos(w) * sin(Omega) + sin(w) * cos(i) * cos(Omega)) + 
+
+        r_o.x * (cos(w) * sin(Omega) + sin(w) * cos(i) * cos(Omega)) +
         r_o.y * (cos(w) * cos(i) * cos(Omega) - sin(w) * sin(Omega)),
-        
+
         r_o.x * sin(w) * sin(i) + r_o.y * cos(w) * sin(i)
     };
 
     Vector3 v = {
-        v_o.x * (cos(w) * cos(Omega) - sin(w) * cos(i) * sin(Omega)) - 
+        v_o.x * (cos(w) * cos(Omega) - sin(w) * cos(i) * sin(Omega)) -
         v_o.y * (sin(w) * cos(Omega) + cos(w) * cos(i) * sin(Omega)),
-        
-        v_o.x * (cos(w) * sin(Omega) + sin(w) * cos(i) * cos(Omega)) + 
+
+        v_o.x * (cos(w) * sin(Omega) + sin(w) * cos(i) * cos(Omega)) +
         v_o.y * (cos(w) * cos(i) * cos(Omega) - sin(w) * sin(Omega)),
-        
+
         v_o.x * sin(w) * sin(i) + v_o.y * cos(w) * sin(i)
     };
 
@@ -306,8 +308,21 @@ int main(int argc, char *argv[])
         int second = timeParts[2].toInt();
 
         double taiMjd = dateToTAIMJD(year, month, day, hour, minute, second);
-        cout << "TAI MJD: " << taiMjd << endl;
-        cout << "===================================================";
+        cout << "TAIMJD: " << taiMjd << endl;
+        cout << "===================================================\n";
+
+        std::array<double, 3> sat1_icrf = {1000, 2000, 500};  // km
+        std::array<double, 3> sat2_icrf = {2000, 3000, 1000}; // km
+
+
+        auto sat1_2d = TRANSFORM2D::transformTo2D(sat1_icrf, sat2_icrf, sat1_icrf);
+        auto sat2_2d = TRANSFORM2D::transformTo2D(sat1_icrf, sat2_icrf, sat2_icrf);
+
+        std::cout << "Satellite 1 2D coordinates: (" << sat1_2d[0] << ", " << sat1_2d[1] << ")\n";
+        std::cout << "Satellite 2 2D coordinates: (" << sat2_2d[0] << ", " << sat2_2d[1] << ")\n";
+
+
+        cout << "===================================================\n";
         
         file.close();
     }

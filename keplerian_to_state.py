@@ -1,27 +1,3 @@
-#!/usr/bin/env python3.4
-
-####################################################################
-#   KPS_Kepler2State.py
-#   KPS
-#	
-#	Author: Kareem Omar
-#	kareem.omar@uah.edu
-#	https://github.com/komrad36
-#
-#	Last updated Feb 27, 2016
-#   This application is entirely my own work.
-####################################################################
-#
-#   Converts Keplerian orbital elements to state vector.
-#         Inputs:
-#         a      -  Semi-major Axis [m]
-#         e      -  Eccentricity
-#         i      -  Inclination [degrees]
-#         Omega  -  Longitude of Ascending Node [degrees]
-#         w      -  Argument of Periapsis [degrees]
-#         M      -  Mean Anomaly [degrees]
-#
-
 from sys import argv, exit
 from math import sin, cos, tan, acos, atan2, ceil, pi, sqrt
 

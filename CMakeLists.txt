@@ -14,6 +14,11 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Network)
 
 add_executable(rvSim
   main.cpp
+  iss.h iss.cpp
+  vehicle.h vehicle.cpp
+  transform2d.h transform2d.cpp
+
+
 )
 target_link_libraries(rvSim Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network)
 
