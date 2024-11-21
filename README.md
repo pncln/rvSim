@@ -98,6 +98,29 @@ $$\vec{v_0} = [0, v\cos(i), v\sin(i)]$$
 
 where $i$ is the orbital inclination in degrees.
 
+## Time Conversion Mathematics
+
+### TAI Modified Julian Date Conversion
+
+The function converts calendar date to TAI (International Atomic Time) Modified Julian Date using the following algorithm:
+
+#### Calendar to Julian Date
+For year $y$, month $m$, day $d$, hour $h$, minute $min$, second $s$:
+
+$$a = \lfloor\frac{14-m}{12}\rfloor$$
+$$y' = y + 4800 - a$$
+$$m' = m + 12a - 3$$
+
+Julian Date calculation:
+$$JD = d + \frac{h-12}{24} + \frac{min}{1440} + \frac{s}{86400} + \frac{153m' + 2}{5} + 365y' + \frac{y'}{4} - \frac{y'}{100} + \frac{y'}{400} - 32045$$
+
+#### TAI MJD Conversion
+$$TAI_{offset} = \frac{37}{86400}$$ (leap seconds)
+
+$$TAI_{MJD} = JD - 2430000.5 + TAI_{offset}$$
+
+This converts civil time to TAI Modified Julian Date, accounting for leap seconds and time standard differences.
+
 ## Dependencies
 
 - Qt Framework
