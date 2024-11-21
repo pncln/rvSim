@@ -126,12 +126,15 @@ $$\nu = 2\arctan(\sqrt{\frac{1+e}{1-e}}\tan(\frac{E}{2}))$$
 
 ### Orbital Frame Vectors
 Distance from central body:
+
 $$r = a(1-e\cos(E))$$
 
 Position in orbital frame:
+
 $$\vec{r}_o = \begin{bmatrix} r\cos(\nu) \\ r\sin(\nu) \\ 0 \end{bmatrix}$$
 
 Velocity in orbital frame:
+
 $$\vec{v}_o = \sqrt{\frac{\mu}{a}} \begin{bmatrix} -\sin(E) \\ \sqrt{1-e^2}\cos(E) \\ 0 \end{bmatrix}$$
 
 ### ECI Frame Transformation
