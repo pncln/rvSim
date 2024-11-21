@@ -98,64 +98,64 @@ $$\vec{v_0} = [0, v\cos(i), v\sin(i)]$$
 
 where $i$ is the orbital inclination in degrees.
 
-## Keplerian Elements to State Vector Conversion
+## Keplerian Elements to Cartesian State Vector Transformation
 
-### Input Orbital Elements
-- $a$: Semi-major axis (meters)
-- $e$: Eccentricity 
-- $i$: Inclination (degrees)
-- $\Omega$: Right ascension of ascending node (degrees)
-- $\omega$: Argument of periapsis (degrees)
-- $M$: Mean anomaly (degrees)
+### Fundamental Parameters
+The transformation process utilizes six canonical orbital elements:
+- Semi-major axis ($a$) [m]
+- Eccentricity ($e$) [-]
+- Inclination ($i$) [rad]
+- Right Ascension of Ascending Node ($\Omega$) [rad]
+- Argument of Periapsis ($\omega$) [rad]
+- Mean Anomaly ($M$) [rad]
 
-### Solving Kepler's Equation
-The transcendental Kepler's equation is solved iteratively using Newton's method to find eccentric anomaly $E$:
+### Eccentric Anomaly Determination
+The transcendental Kepler equation is solved through Newton-Raphson iteration:
 
 $$M = E - e\sin(E)$$
 
-Newton iteration:
+With iterative refinement:
+$$E_{n+1} = E_n - \frac{E_n - e\sin(E_n) - M}{1 - e\cos(E_n)}$$
 
-$$E_{i+1} = E_i - \frac{E_i - e\sin(E_i) - M}{1 - e\cos(E_i)}$$
+[Ref: Battin, R.H., "An Introduction to the Mathematics and Methods of Astrodynamics", AIAA Education Series, 1999]
 
-Continues until $|E_{i+1} - E_i| < \text{tolerance}$
-
-### True Anomaly Calculation
-True anomaly $\nu$ is found using the tan-half angle formula:
+### True Anomaly Computation
+The geometric angle $\nu$ is derived using the tangent half-angle formula:
 
 $$\nu = 2\arctan(\sqrt{\frac{1+e}{1-e}}\tan(\frac{E}{2}))$$
 
-### Orbital Frame Vectors
-Distance from central body:
+[Ref: Vallado, D.A., "Fundamentals of Astrodynamics and Applications", 4th Ed., 2013]
 
+### Orbital Frame Representation
+Radial distance:
 $$r = a(1-e\cos(E))$$
 
-Position in orbital frame:
-
+Position vector in orbital frame:
 $$\vec{r}_o = \begin{bmatrix} r\cos(\nu) \\ r\sin(\nu) \\ 0 \end{bmatrix}$$
 
-Velocity in orbital frame:
-
+Velocity vector derived from vis-viva equation:
 $$\vec{v}_o = \sqrt{\frac{\mu}{a}} \begin{bmatrix} -\sin(E) \\ \sqrt{1-e^2}\cos(E) \\ 0 \end{bmatrix}$$
 
-### ECI Frame Transformation
-The transformation to Earth-Centered Inertial frame involves three rotations:
+[Ref: Prussing, J.E. and Conway, B.A., "Orbital Mechanics", Oxford University Press, 2012]
 
-1. About z-axis by $-\omega$ (argument of periapsis)
-2. About x-axis by $-i$ (inclination)
-3. About z-axis by $-\Omega$ (RAAN)
+### Inertial Frame Transformation
+The transformation matrix from orbital to Earth-Centered Inertial (ECI) frame:
 
-Final position vector components:
+$$\mathbf{R} = \mathbf{R}_3(-\Omega)\mathbf{R}_1(-i)\mathbf{R}_3(-\omega)$$
 
-$$x = r[\cos(\omega)\cos(\Omega) - \sin(\omega)\cos(i)\sin(\Omega)]$$
-$$y = r[\cos(\omega)\sin(\Omega) + \sin(\omega)\cos(i)\cos(\Omega)]$$
-$$z = r[\sin(\omega)\sin(i)]$$
+Resulting in position components:
+$$\begin{aligned}
+x &= r[\cos(\omega)\cos(\Omega) - \sin(\omega)\cos(i)\sin(\Omega)] \\
+y &= r[\cos(\omega)\sin(\Omega) + \sin(\omega)\cos(i)\cos(\Omega)] \\
+z &= r[\sin(\omega)\sin(i)]
+\end{aligned}$$
 
-Similar transformations apply to velocity vector components.
+[Ref: Curtis, H.D., "Orbital Mechanics for Engineering Students", Butterworth-Heinemann, 2020]
 
-### Output
-- Position vector $\vec{r}$ in ECI frame (meters)
-- Velocity vector $\vec{v}$ in ECI frame (meters/second)
-- All angular quantities in both radians and degrees
+### Implementation Notes
+The algorithm employs double-precision arithmetic and validates convergence within a maximum iteration limit for numerical stability.
+
+[Ref: Montenbruck, O. and Gill, E., "Satellite Orbits: Models, Methods, and Applications", Springer, 2000]
 
 ## Time Conversion Mathematics
 
