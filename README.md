@@ -98,6 +98,62 @@ $$\vec{v_0} = [0, v\cos(i), v\sin(i)]$$
 
 where $i$ is the orbital inclination in degrees.
 
+## Keplerian Elements to State Vector Conversion
+
+### Input Orbital Elements
+- $a$: Semi-major axis (meters)
+- $e$: Eccentricity 
+- $i$: Inclination (degrees)
+- $\Omega$: Right ascension of ascending node (degrees)
+- $\omega$: Argument of periapsis (degrees)
+- $M$: Mean anomaly (degrees)
+
+### Solving Kepler's Equation
+The transcendental Kepler's equation is solved iteratively using Newton's method to find eccentric anomaly $E$:
+
+$$M = E - e\sin(E)$$
+
+Newton iteration:
+
+$$E_{i+1} = E_i - \frac{E_i - e\sin(E_i) - M}{1 - e\cos(E_i)}$$
+
+Continues until $|E_{i+1} - E_i| < \text{tolerance}$
+
+### True Anomaly Calculation
+True anomaly $\nu$ is found using the tan-half angle formula:
+
+$$\nu = 2\arctan(\sqrt{\frac{1+e}{1-e}}\tan(\frac{E}{2}))$$
+
+### Orbital Frame Vectors
+Distance from central body:
+$$r = a(1-e\cos(E))$$
+
+Position in orbital frame:
+$$\vec{r}_o = \begin{bmatrix} r\cos(\nu) \\ r\sin(\nu) \\ 0 \end{bmatrix}$$
+
+Velocity in orbital frame:
+$$\vec{v}_o = \sqrt{\frac{\mu}{a}} \begin{bmatrix} -\sin(E) \\ \sqrt{1-e^2}\cos(E) \\ 0 \end{bmatrix}$$
+
+### ECI Frame Transformation
+The transformation to Earth-Centered Inertial frame involves three rotations:
+
+1. About z-axis by $-\omega$ (argument of periapsis)
+2. About x-axis by $-i$ (inclination)
+3. About z-axis by $-\Omega$ (RAAN)
+
+Final position vector components:
+
+$$x = r[\cos(\omega)\cos(\Omega) - \sin(\omega)\cos(i)\sin(\Omega)]$$
+$$y = r[\cos(\omega)\sin(\Omega) + \sin(\omega)\cos(i)\cos(\Omega)]$$
+$$z = r[\sin(\omega)\sin(i)]$$
+
+Similar transformations apply to velocity vector components.
+
+### Output
+- Position vector $\vec{r}$ in ECI frame (meters)
+- Velocity vector $\vec{v}$ in ECI frame (meters/second)
+- All angular quantities in both radians and degrees
+
 ## Time Conversion Mathematics
 
 ### TAI Modified Julian Date Conversion
