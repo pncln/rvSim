@@ -115,6 +115,7 @@ The transcendental Kepler equation is solved through Newton-Raphson iteration:
 $$M = E - e\sin(E)$$
 
 With iterative refinement:
+
 $$E_{n+1} = E_n - \frac{E_n - e\sin(E_n) - M}{1 - e\cos(E_n)}$$
 
 [Ref: Battin, R.H., "An Introduction to the Mathematics and Methods of Astrodynamics", AIAA Education Series, 1999]
@@ -128,12 +129,15 @@ $$\nu = 2\arctan(\sqrt{\frac{1+e}{1-e}}\tan(\frac{E}{2}))$$
 
 ### Orbital Frame Representation
 Radial distance:
+
 $$r = a(1-e\cos(E))$$
 
 Position vector in orbital frame:
+
 $$\vec{r}_o = \begin{bmatrix} r\cos(\nu) \\ r\sin(\nu) \\ 0 \end{bmatrix}$$
 
 Velocity vector derived from vis-viva equation:
+
 $$\vec{v}_o = \sqrt{\frac{\mu}{a}} \begin{bmatrix} -\sin(E) \\ \sqrt{1-e^2}\cos(E) \\ 0 \end{bmatrix}$$
 
 [Ref: Prussing, J.E. and Conway, B.A., "Orbital Mechanics", Oxford University Press, 2012]
@@ -144,6 +148,7 @@ The transformation matrix from orbital to Earth-Centered Inertial (ECI) frame:
 $$\mathbf{R} = \mathbf{R}_3(-\Omega)\mathbf{R}_1(-i)\mathbf{R}_3(-\omega)$$
 
 Resulting in position components:
+
 $$\begin{aligned}
 x &= r[\cos(\omega)\cos(\Omega) - \sin(\omega)\cos(i)\sin(\Omega)] \\
 y &= r[\cos(\omega)\sin(\Omega) + \sin(\omega)\cos(i)\cos(\Omega)] \\
@@ -152,7 +157,6 @@ z &= r[\sin(\omega)\sin(i)]
 
 [Ref: Curtis, H.D., "Orbital Mechanics for Engineering Students", Butterworth-Heinemann, 2020]
 
-### Implementation Notes
 The algorithm employs double-precision arithmetic and validates convergence within a maximum iteration limit for numerical stability.
 
 [Ref: Montenbruck, O. and Gill, E., "Satellite Orbits: Models, Methods, and Applications", Springer, 2000]
