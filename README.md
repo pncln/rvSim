@@ -112,6 +112,7 @@ $$y' = y + 4800 - a$$
 $$m' = m + 12a - 3$$
 
 Julian Date calculation:
+
 $$JD = d + \frac{h-12}{24} + \frac{min}{1440} + \frac{s}{86400} + \frac{153m' + 2}{5} + 365y' + \frac{y'}{4} - \frac{y'}{100} + \frac{y'}{400} - 32045$$
 
 #### TAI MJD Conversion
