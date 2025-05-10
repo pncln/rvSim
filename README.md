@@ -194,7 +194,7 @@ This converts civil time to TAI Modified Julian Date, accounting for leap second
 
 1. Clone the repository
     ```bash
-    git clone https://github.com/yourusername/rvSim.git
+    git clone https://github.com/pncln/rvSim.git
     ```
 
 2. Build the project
